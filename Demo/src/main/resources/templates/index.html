@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+</head>
+<body>
+	<table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>age</th>
+            <th>sex</th>
+            <th>操作</th>
+        </tr>
+         <tr th:each="item : ${students}">
+             <td><span th:text="${item.city_id}"></span></td>
+             <td><span th:text="${item.name}"></span><input th:id="'name' + ${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.name}" /></td>
+             <td><span th:text="${item.age}"></span><input th:id="'age'+${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.age}" /></td>
+             <td><span th:text="${item.sex}"></span><input th:id="'sex'+${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.sex}" /></td>
+             <td><input th:id="'update'+${item.id}" style="display: none;" th:onclick="'javascript:update('+${item.id}+')' " type="button" value="提交" /><input th:id="'alterSty' + ${item.id}"  th:onclick="'javascript:alterSty('+${item.id}+')'"  type="button" value="修改" /><input th:id="'delete'+${item.id}" th:onclick="'javascript:del('+${item.id}+')'" type="button" value="删除" /></td>
+         </tr>
+    </table>
+    <div>
+    	name：<input id="name" style="width: 50px;" type="text" />age：<input id="age" style="width: 50px;" type="text" />sex：<input id="sex" style="width: 50px;" type="text" /><input id="add" th:onclick="'javascript:add()'" type="button" value="新增" />
+    </div>
+    
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <!-- <th>操作</th> -->
+        </tr>
+         <tr th:each="item : ${citys}">
+             <td><span th:text="${item.id}"></span></td>
+             <td><span th:text="${item.cityName}"></span><input th:id="'name' + ${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.cityName}" /></td>
+<!--              <td><input th:id="'update'+${item.id} + 'c'" style="display: none;" th:onclick="'javascript:update(&quot'+${item.id}+ 'c' + '&quot)' " type="button" value="提交" /><input th:id="'alterSty' + ${item.id} + 'c'"  th:onclick="'javascript:alterSty(&quot'+${item.id}+'c'+ '&quot)'"  type="button" value="修改" /><input th:id="'delete'+${item.id} + 'c'" th:onclick="'javascript:del(&quot'+${item.id}+'c' + '&quot)'" type="button" value="删除" /></td>
+ -->         </tr>
+    </table>
+  <!--   <div>
+    	name：<input id="name" style="width: 50px;" type="text" /><input id="add" th:onclick="'javascript:add()'" type="button" value="新增" />
+    </div> -->
+<script type="text/javascript">
+function alterSty(id){
+	var name = document.getElementById('name' + id);
+	var age = document.getElementById('age' + id);
+	var sex = document.getElementById('sex' + id);
+	var alterSty = document.getElementById('alterSty' + id);
+	var deleteB = document.getElementById('delete' + id);
+	var update = document.getElementById('update' + id);
+	name.style.display="inline";
+	if(age!=null)age.style.display="inline";
+	if(sex!=null)sex.style.display="inline";
+	alterSty.style.display="none";
+	deleteB.style.display="none";
+	update.style.display="inline";
+}
+	function update(id){
+		var name = document.getElementById('name' + id);
+		var age = document.getElementById('age' + id);
+		var sex = document.getElementById('sex' + id);
+		window.location.href="update?id=" + id + "&name=" + name.value + "&age=" + age.value +"&sex=" + sex.value;
+	}
+	function add(){
+		var name = document.getElementById('name');
+		var age = document.getElementById('age');
+		var sex = document.getElementById('sex');
+		window.location.href="add?name=" + name.value + "&age=" + age.value +"&sex=" + sex.value;
+	}
+	function del(id){
+		window.location.href="delete?id=" + id;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+spring:
+  properites:
+    debug：true
+  thymeleaf:
+    cache: false     
+  datasource:
+    student:
+      type: com.alibaba.druid.pool.DruidDataSource      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/student?characterEncoding=UTF-8&serverTimezone=GMT%2B8
+      username: root
+      password: root
+    city:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/springbootdb?characterEncoding=UTF-8&serverTimezone=GMT%2B8
+      username: root
+      password: root
+  
+mybatis:
+  #添加扫描映射文件路径
+  mapper-locations:
+  - classpath*:mapper/*/*.xml
+server:
+  tomcat:
+    access_log_enabled: true
+    basedir: target/tomcat      
+logging:
+  level:
+    org:
+      SQL: DEBUG
