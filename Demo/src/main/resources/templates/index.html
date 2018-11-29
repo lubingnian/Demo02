@@ -14,7 +14,7 @@
             <th>操作</th>
         </tr>
          <tr th:each="item : ${students}">
-             <td><span th:text="${item.city_id}"></span></td>
+             <td><span th:text="${item.id}"></span></td>
              <td><span th:text="${item.name}"></span><input th:id="'name' + ${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.name}" /></td>
              <td><span th:text="${item.age}"></span><input th:id="'age'+${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.age}" /></td>
              <td><span th:text="${item.sex}"></span><input th:id="'sex'+${item.id}" style="display: none;width: 50px;" type="text" th:value="${item.sex}" /></td>
