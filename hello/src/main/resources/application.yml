@@ -1,0 +1,120 @@
+spring:
+  security: 
+    user:
+      name: user
+      password: 1234
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  #内置邮件服务信息   
+  mail:
+    host: smtp.qq.com
+    username: 1402659613@qq.com
+    password: jovitrmjbzwlbacc
+    properties:
+      mail:
+        smtp: 
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  #自定义的主数据源配置信息
+  datasource:
+    student:
+      #监控统计拦截的filters
+      type: com.alibaba.druid.pool.DruidDataSource
+      platform: mysql
+      driverClassName: com.mysql.cj.jdbc.Driver
+      #配置基本属性
+      url: jdbc:mysql://127.0.0.1:3306/student?characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: root
+      #配置初始化大小/最小/最大
+      initialSize: 1
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      minIdle: 1
+      maxActive: 20
+      #获取连接等待超时时间
+      maxWait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+      #一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
+      filters: stat, wall, log4j //*
+    
+    city:
+      #监控统计拦截的filters
+      type: com.alibaba.druid.pool.DruidDataSource
+      platform: mysql
+      driverClassName: com.mysql.cj.jdbc.Driver
+      #配置基本属性
+      url: jdbc:mysql://127.0.0.1:3306/springbootdb?characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: root
+      #配置初始化大小/最小/最大
+      initialSize: 1
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      minIdle: 1
+      maxActive: 20
+      #获取连接等待超时时间
+      maxWait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+      #一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
+      filters: stat, wall, log4j //* 
+quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: jdbc
+    #初始化表结构
+    #jdbc:
+      #initialize-schema: neve
+mybatis:
+  #添加扫描映射文件路径
+  mapper-locations:
+  - classpath*:mapper/*/*.xml
+
+#声明一个邮件信息对象
+smtp:
+  service: smtp.qq.com
+  port: 587
+  address: 1402659613@qq.com
+  pwd: jovitrmjbzwlbacc
+  nickname: cehsi
+  
